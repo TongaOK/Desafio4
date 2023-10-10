@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Motosierrap",
+		"description": "Herramienta cortante",
+		"price": "12000",
+		"thumbnail": "*",
+		"code": "1",
+		"stock": "5",
+		"id": 1
+	},
+	{
+		"title": "Sierra",
+		"description": "Herramienta cortante",
+		"price": "750",
+		"thumbnail": "*",
+		"code": "2",
+		"stock": "3",
+		"id": 2
+	}
+]
