@@ -7,26 +7,30 @@ class ProductManager {
   }
 
   async addProduct(product) {
-    const { title, description, price, thumbnail, code, stock } = product;
-    if (!title || !description || !price || !thumbnail || !code || !stock) {
-      throw new Error("Todos los campos son obligatorios.");
-    }
-    const products = await getJSONFromFile(this.path);
-    if (products.some((p) => p.code === code)) {
-      console.log(`Ya se encuentra agregado ese code: ${code}`);
-    } else {
-      const id = this.productIdCounter++;
-      const newProduct = {
-        title,
-        description,
-        price,
-        thumbnail,
-        code,
-        stock,
-        id,
-      };
-      products.push(newProduct);
-      return saveJSONToFile(this.path, products);
+    try {
+      const { title, description, price, thumbnail, code, stock } = product;
+      if (!title || !description || !price || !thumbnail || !code || !stock) {
+        throw new Error("Todos los campos son obligatorios.");
+      }
+      const products = await getJSONFromFile(this.path);
+      if (products.some((p) => p.code === code)) {
+        console.log(`Ya se encuentra agregado ese code: ${code}`);
+      } else {
+        const id = this.productIdCounter++;
+        const newProduct = {
+          title,
+          description,
+          price,
+          thumbnail,
+          code,
+          stock,
+          id,
+        };
+        products.push(newProduct);
+        return saveJSONToFile(this.path, products);
+      }
+    } catch (error) {
+      console.error(`Error al agregar un producto: ${error.message}`);
     }
   }
 
