@@ -17,6 +17,7 @@ class ProductManager {
         console.log(`Ya se encuentra agregado ese code: ${code}`);
       } else {
         const id = this.productIdCounter++;
+        console.log( "Id: ", this.productIdCounter)
         const newProduct = {
           title,
           description,
@@ -27,7 +28,8 @@ class ProductManager {
           id,
         };
         products.push(newProduct);
-        return saveJSONToFile(this.path, products);
+        await saveJSONToFile(this.path, products);
+        return newProduct;
       }
     } catch (error) {
       console.error(`Error al agregar un producto: ${error.message}`);

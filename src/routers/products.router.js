@@ -1,5 +1,8 @@
 import { Router } from "express";
 import ProductManager from "../utils/productManager.js";
+import io from "../server.js";
+
+
 const router = Router();
 const productManager = new ProductManager("./products.json");
 
@@ -40,6 +43,8 @@ router.post("/", async (req, res) => {
   const product = req.body;
   console.log(product);
   const addedProduct = await productManager.addProduct(product);
+  console.log(addedProduct);
+  io.emit("newProduct", addedProduct);
   res.status(201).json(addedProduct);
 });
 
