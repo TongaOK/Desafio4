@@ -3,13 +3,13 @@ import ProductManager from "../utils/productManager.js";
 import io from "../server.js";
 
 
+
 const router = Router();
 const productManager = new ProductManager("./products.json");
 
 router.get("/", async (req, res) => {
   try {
     const { limit } = req.query;
-    console.log("Solicitud GET a /products recibida");
     let products = await productManager.getProducts();
     console.log(products);
 
@@ -78,6 +78,7 @@ router.delete("/:pid", async (req, res) => {
   const productId = req.params.pid;
   try {
     await productManager.deleteProduct(parseInt(productId));
+    io.emit("deleteProduct", productId);
   } catch (error) {
     console.log(error);
   }

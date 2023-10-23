@@ -10,7 +10,6 @@ import RTPRouter from "./routers/realtimeproducts.router.js";
 
 const app = express();
 
-// const port = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,13 +20,9 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 app.use("/", homeRouter);
-
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/realtimeproducts", RTPRouter);
 
-// app.listen(port, () => {
-//   console.log("Server is running on port 8080");
-// });
 
 export default app;

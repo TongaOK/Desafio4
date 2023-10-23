@@ -1,4 +1,3 @@
-import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import app from "./app.js";
@@ -7,11 +6,15 @@ const server = http.createServer(app);
 const io = new Server(server);
 const PORT = 8080;
 let serverSocket;
+
 io.on("connection", (socket) => {
   console.log("a user connected");
   serverSocket = socket;
   socket.on("newProduct", (product) => {
     console.log("newProduct: ", product);
+  });
+  socket.on("deleteProduct", (productId) => {
+    console.log("deleteProduct: ", productId);
   });
 });
 

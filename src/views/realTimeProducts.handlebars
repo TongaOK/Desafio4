@@ -23,7 +23,7 @@
                 <span>Code: {{this.code}}</span>
                 <span>Stock: {{this.stock}}</span>
                 <span>Id: {{this.id}}</span>
-                <button id="deleteProductButton">Borrar Producto</button>
+                <button onclick="deleteProduct({{this.id}})" id="deleteProductButton">Borrar Producto</button>
             </li>
             {{/each}}
         </ul>
@@ -64,6 +64,8 @@
         const price = document.getElementById('price')
         const code = document.getElementById('code')
         const stock = document.getElementById('stock')
+        const deleteProductButton = document.getElementById('deleteProductButton')
+
 
 
         form.addEventListener('submit', (e) => {
@@ -93,6 +95,7 @@
         const priceElement = document.createElement("span")
         const codeElement = document.createElement("span")
         const stockElement = document.createElement("span")
+        const buttonElement = document.createElement("button")
         titleElement.innerHTML="title: " + addedProduct.title
         descriptionElement.innerHTML="description: " + addedProduct.description
         priceElement.innerHTML="price: " + addedProduct.price
@@ -104,8 +107,27 @@
         li.appendChild(priceElement)
         li.appendChild(codeElement)
         li.appendChild(stockElement)
+        li.setAttribute("id", `producto-${addedProduct.id}`)
+        buttonElement.addEventListener("click", () => {
+            deleteProduct(addedProduct.id)
+        })
+        buttonElement.innerHTML = "Borrar Producto"
+        li.appendChild(buttonElement)
         ul.appendChild(li)
         })
+
+        const deleteProduct = (id) =>{
+            console.log(id)
+            fetch(`http://localhost:8080/api/products/${id}`, {
+                method: "DELETE",
+            });
+        }
+
+        socket.on("deleteProduct", (productId) => {
+            const li = document.getElementById(`producto-${productId}`)
+            li.remove()
+        })
+
     </script>
 </body>
 

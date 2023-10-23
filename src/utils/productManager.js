@@ -29,7 +29,7 @@ class ProductManager {
         };
         products.push(newProduct);
         await saveJSONToFile(this.path, products);
-        return newProduct;
+        return newProduct; // si borramos esta linea, funciona igual (xq f5?)
       }
     } catch (error) {
       console.error(`Error al agregar un producto: ${error.message}`);
