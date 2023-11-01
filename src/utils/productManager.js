@@ -1,9 +1,10 @@
 import fs from "fs";
+import { v4 as uuidv4 } from 'uuid';
 
 class ProductManager {
   constructor(path) {
     this.path = path;
-    this.productIdCounter = 1;
+    
   }
 
   async addProduct(product) {
@@ -16,8 +17,8 @@ class ProductManager {
       if (products.some((p) => p.code === code)) {
         console.log(`Ya se encuentra agregado ese code: ${code}`);
       } else {
-        const id = this.productIdCounter++;
-        console.log( "Id: ", this.productIdCounter)
+        const id = uuidv4();
+        // console.log( "Id: ", this.productIdCounter)
         const newProduct = {
           title,
           description,

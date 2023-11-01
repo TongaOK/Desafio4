@@ -23,7 +23,8 @@
                 <span>Code: {{this.code}}</span>
                 <span>Stock: {{this.stock}}</span>
                 <span>Id: {{this.id}}</span>
-                <button onclick="deleteProduct({{this.id}})" id="deleteProductButton">Borrar Producto</button>
+                <button onclick="deleteProduct('{{this.id}}')" id="deleteProductButton">Borrar Producto</button>
+
             </li>
             {{/each}}
         </ul>
